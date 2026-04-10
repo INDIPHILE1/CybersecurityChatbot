@@ -23,5 +23,5 @@ A C# console chatbot that educates users about cybersecurity best practices.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/CybersecurityChatbot.git
+   git clone https://github.com/INDIPHILE1/CybersecurityChatbot.git
    cd CybersecurityChatbot
