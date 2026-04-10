@@ -23,5 +23,10 @@ namespace CybersecurityChatbot
         {
             return (DateTime.Now - SessionStartTime).TotalMinutes;
         }
+
+        public void IncrementQuestions()
+        {
+            QuestionsAsked++;
+        }
     }
 }
