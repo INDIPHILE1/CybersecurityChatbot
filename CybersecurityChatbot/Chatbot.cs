@@ -6,6 +6,10 @@ namespace CybersecurityChatbot
 {
     public class Chatbot
     {
+        // Path to a WAV file you want the bot to use for a startup greeting.
+        // Use a verbatim string to avoid needing to escape backslashes.
+        private const string AudioFilePath = @"C:\Users\Student\Downloads\greeting.wav";
+
         private Dictionary<string, string> responses;
 
         public Chatbot()
