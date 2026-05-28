@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace POEPART2
 {
     public class User
-    {
+    { 
         public string Name { get; set; } = "";
         public string FavoriteTopic { get; set; } = "";
         public int QuestionsAsked { get; set; }
