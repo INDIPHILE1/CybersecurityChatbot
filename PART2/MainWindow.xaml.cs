@@ -11,7 +11,7 @@ namespace POEPART2
     {
         private User currentUser;
         private ChatbotEngine chatbot;
-        private string audioPath;
+        private string audioPath; 
 
         public MainWindow()
         {

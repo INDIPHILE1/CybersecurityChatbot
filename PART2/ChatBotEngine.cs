@@ -11,7 +11,7 @@ namespace POEPART2
         private User currentUser;
         private string lastTopic = "";
         private int followUpCount = 0;
-
+         
         private Dictionary<string, string> primaryResponses;
         private Dictionary<string, List<string>> randomResponses;
         private Dictionary<string, string> sentimentResponses;
