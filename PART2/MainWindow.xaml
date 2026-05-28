@@ -1,0 +1,115 @@
+﻿<Window x:Class="POEPART2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POEPART2"
+        mc:Ignorable="d"
+        Title="LearnMate" Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid x:Name="GridMain">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FFE5E3F5" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Left sidebar (Search History) -->
+        <Rectangle HorizontalAlignment="Left" Height="534" Stroke="#FFFFDEDE" VerticalAlignment="Center" Width="117" Fill="WhiteSmoke"/>
+        <Label Content="Search History" HorizontalAlignment="Left" Margin="-3,93,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#2C3E50" RenderTransformOrigin="0.215,1.101"/>
+
+        <!-- Top header -->
+        <Label Content="CyberBot" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" 
+               FontSize="36" FontWeight="Bold" Foreground="#FFCEC3C3" FontFamily="Cascadia Code SemiBold" RenderTransformOrigin="36.335,199.913"/>
+        <TextBlock HorizontalAlignment="Center"
+           Margin="0,160,0,0"
+           VerticalAlignment="Top"
+           FontFamily="Consolas"
+           FontSize="14"
+           FontWeight="Bold"
+           Foreground="#FFF6F9F8"
+           TextAlignment="Center"
+           Text="
+╔══════════════╗
+║ CYBER BOT ║
+╚══════════════╝" Height="25"/>
+
+        <!-- Chat area background rectangle (decorative) -->
+        <Rectangle HorizontalAlignment="Left"
+           Height="320"
+           Margin="135,190,0,0"
+           Stroke="#4A6FA5"
+           VerticalAlignment="Top"
+           Width="650"
+           Fill="#F0F4F8"
+           RadiusX="15"
+           RadiusY="15"/>
+
+
+        <!-- Welcome label -->
+        <Label Content="Welcome to CyberBot"
+       HorizontalAlignment="Center"
+       VerticalAlignment="Top"
+       FontWeight="Bold"
+       FontSize="14"
+       Foreground="#1A2A3A"
+       Margin="0,205,0,0"
+       Background="#FFF0E3E3"/>
+
+        <!-- Chat History ListBox -->
+        <ListBox x:Name="ChatHistoryListBox"
+         HorizontalAlignment="Left"
+         Margin="150,240,0,0"
+         VerticalAlignment="Top"
+         Width="620"
+         Height="180"
+         Background="White"
+         BorderBrush="#4A6FA5"
+         BorderThickness="2"/>
+
+        <!-- Message input area -->
+        <TextBox x:Name="MessageTextBox"
+         HorizontalAlignment="Left"
+         Margin="150,446,0,0"
+         Width="550"
+         Height="40"
+         Background="White"
+         FontSize="14"
+         Foreground="Black"
+         BorderBrush="#4A6FA5"
+         BorderThickness="2"
+         VerticalAlignment="Top"
+         VerticalContentAlignment="Center"
+         KeyDown="MessageTextBox_KeyDown"/>
+
+        <!-- Send icon -->
+        <Label Content="CyberBot" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Your Ai Assistant" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.944,1.788" FontWeight="Bold"/>
+        <Button Content="Enter Name"
+        HorizontalAlignment="Left"
+        Margin="575,446,0,0"
+        VerticalAlignment="Top"
+        Width="120"
+        Height="40"
+        Click="Button_Click"
+        Background="#1A2A3A"
+        Foreground="White"
+        FontWeight="Bold"/>
+        <Button Content="SEND"
+        HorizontalAlignment="Left"
+        Margin="705,446,0,0"
+        VerticalAlignment="Top"
+        Height="40"
+        Width="55"
+        FontWeight="Bold"
+        Background="#FF263FE5"
+        FontSize="14"
+        FontStyle="Italic"
+        Click="SendButton_Click"/>
+        <Image HorizontalAlignment="Left" Height="69" Margin="373,75,0,0" VerticalAlignment="Top" Width="51" RenderTransformOrigin="-1.482,0.398" Source="/robot-logo-icon-design_775854-1820.jpg"/>
+
+    </Grid>
+</Window>

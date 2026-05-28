@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13 d17.14
+VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CybersecurityChatbot", "CybersecurityChatbot\CybersecurityChatbot.csproj", "{35EE4349-36B6-4CA0-93B5-6F25A8932762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POEPART2", "PART2\POEPART2.csproj", "{0A868D32-20A9-4457-811A-47BF52EFC051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{35EE4349-36B6-4CA0-93B5-6F25A8932762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35EE4349-36B6-4CA0-93B5-6F25A8932762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35EE4349-36B6-4CA0-93B5-6F25A8932762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A868D32-20A9-4457-811A-47BF52EFC051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A868D32-20A9-4457-811A-47BF52EFC051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A868D32-20A9-4457-811A-47BF52EFC051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A868D32-20A9-4457-811A-47BF52EFC051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
