@@ -21,7 +21,7 @@ namespace POEPART2
             currentUser = user;
             LoadPrimaryResponses(); 
             LoadRandomResponses();
-            LoadSentimentResponses();
+            LoadSentimentResponses(); 
         }
 
         private void LoadPrimaryResponses()

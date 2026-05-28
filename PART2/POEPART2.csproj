@@ -11,7 +11,7 @@
   <ItemGroup>
     <None Remove="robot-logo-icon-design_775854-1820.jpg" />
   </ItemGroup>
-
+ 
   <ItemGroup>
     <Resource Include="robot-logo-icon-design_775854-1820.jpg" />
   </ItemGroup>
