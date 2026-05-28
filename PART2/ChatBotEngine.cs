@@ -19,7 +19,7 @@ namespace POEPART2
         public ChatbotEngine(User user)
         {
             currentUser = user;
-            LoadPrimaryResponses();
+            LoadPrimaryResponses(); 
             LoadRandomResponses();
             LoadSentimentResponses();
         }
