@@ -19,7 +19,7 @@ namespace POEPART2
             QuestionsAsked = 0;
             FavoriteTopic = "";
         }
-
+         
         public void IncrementQuestions() => QuestionsAsked++;
         public double GetSessionDuration() => (DateTime.Now - SessionStartTime).TotalMinutes;
     }
