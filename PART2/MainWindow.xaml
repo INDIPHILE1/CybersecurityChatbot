@@ -67,7 +67,7 @@
                FontSize="14"
                Foreground="#1A2A3A"
                Margin="0,195,0,0"
-               Background="#FFF0E3E3"/>
+               Background="#FFF0E3E3"/> 
 
         <!-- ========== TAB 1: CHAT ========== -->
         <Grid x:Name="ChatPanel" Visibility="Visible">
