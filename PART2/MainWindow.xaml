@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:local="clr-namespace:POEPART2" 
         mc:Ignorable="d"
-        Title="LearnMate" Height="550" Width="800"
+        Title="LearnMate" Height="650" Width="850"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
 
@@ -17,99 +17,204 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <!-- Left sidebar (Search History) -->
-        <Rectangle HorizontalAlignment="Left" Height="534" Stroke="#FFFFDEDE" VerticalAlignment="Center" Width="117" Fill="WhiteSmoke"/>
-        <Label Content="Search History" HorizontalAlignment="Left" Margin="-3,93,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#2C3E50" RenderTransformOrigin="0.215,1.101"/>
+        <!-- Left sidebar -->
+        <Rectangle HorizontalAlignment="Left" Height="620" Stroke="#FFFFDEDE" VerticalAlignment="Center" Width="117" Fill="WhiteSmoke"/>
+        <Label Content="📋 Menu" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#2C3E50"/>
+        <Label Content="CyberBot" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Your AI Assistant" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <!-- Sidebar Menu Buttons -->
+        <Button Content="💬 Chat" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="95" Height="30" 
+                Background="#4A6FA5" Foreground="White" FontWeight="Bold" Click="ChatTab_Click"/>
+        <Button Content="📋 Tasks" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Width="95" Height="30" 
+                Background="#4A6FA5" Foreground="White" FontWeight="Bold" Click="TasksTab_Click"/>
+        <Button Content="🎯 Quiz" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="95" Height="30" 
+                Background="#4A6FA5" Foreground="White" FontWeight="Bold" Click="QuizTab_Click"/>
+        <Button Content="📊 Log" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="95" Height="30" 
+                Background="#4A6FA5" Foreground="White" FontWeight="Bold" Click="LogTab_Click"/>
 
         <!-- Top header -->
         <Label Content="CyberBot" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" 
-               FontSize="36" FontWeight="Bold" Foreground="#FFCEC3C3" FontFamily="Cascadia Code SemiBold" RenderTransformOrigin="36.335,199.913"/>
+               FontSize="36" FontWeight="Bold" Foreground="#FFCEC3C3" FontFamily="Cascadia Code SemiBold"/>
+        <Image HorizontalAlignment="Center" Height="69" Margin="0,75,0,0" VerticalAlignment="Top" Width="51" 
+               Source="/robot-logo-icon-design_775854-1820.jpg"/>
         <TextBlock HorizontalAlignment="Center"
-           Margin="0,160,0,0"
-           VerticalAlignment="Top"
-           FontFamily="Consolas"
-           FontSize="14"
-           FontWeight="Bold"
-           Foreground="#FFF6F9F8"
-           TextAlignment="Center"
-           Text="
-╔══════════════╗
-║ CYBER BOT ║
-╚══════════════╝" Height="25"/>
+                   Margin="0,130,0,0"
+                   VerticalAlignment="Top"
+                   FontFamily="Consolas"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="#FFF6F9F8"
+                   TextAlignment="Center"
+                   Text="╔══════════════╗&#10;║  CYBER BOT   ║&#10;╚══════════════╝" Height="36"/>
 
-        <!-- Chat area background rectangle (decorative) -->
+        <!-- Chat area background rectangle -->
         <Rectangle HorizontalAlignment="Left"
-           Height="320"
-           Margin="135,190,0,0"
-           Stroke="#4A6FA5"
-           VerticalAlignment="Top"
-           Width="650"
-           Fill="#F0F4F8"
-           RadiusX="15"
-           RadiusY="15"/>
-
+                   Height="320"
+                   Margin="135,190,0,0"
+                   Stroke="#4A6FA5"
+                   VerticalAlignment="Top"
+                   Width="680"
+                   Fill="#F0F4F8"
+                   RadiusX="15"
+                   RadiusY="15"/>
 
         <!-- Welcome label -->
         <Label Content="Welcome to CyberBot"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Top"
-       FontWeight="Bold"
-       FontSize="14"
-       Foreground="#1A2A3A"
-       Margin="0,205,0,0"
-       Background="#FFF0E3E3"/>
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               FontWeight="Bold"
+               FontSize="14"
+               Foreground="#1A2A3A"
+               Margin="0,195,0,0"
+               Background="#FFF0E3E3"/>
 
-        <!-- Chat History ListBox -->
-        <ListBox x:Name="ChatHistoryListBox"
-         HorizontalAlignment="Left"
-         Margin="150,240,0,0"
-         VerticalAlignment="Top"
-         Width="620"
-         Height="180"
-         Background="White"
-         BorderBrush="#4A6FA5"
-         BorderThickness="2"/>
+        <!-- ========== TAB 1: CHAT ========== -->
+        <Grid x:Name="ChatPanel" Visibility="Visible">
+            <ListBox x:Name="ChatHistoryListBox"
+                     HorizontalAlignment="Left"
+                     Margin="150,240,0,0"
+                     VerticalAlignment="Top"
+                     Width="650"
+                     Height="180"
+                     Background="White"
+                     BorderBrush="#4A6FA5"
+                     BorderThickness="2"/>
 
-        <!-- Message input area -->
-        <TextBox x:Name="MessageTextBox"
-         HorizontalAlignment="Left"
-         Margin="150,446,0,0"
-         Width="550"
-         Height="40"
-         Background="White"
-         FontSize="14"
-         Foreground="Black"
-         BorderBrush="#4A6FA5"
-         BorderThickness="2"
-         VerticalAlignment="Top"
-         VerticalContentAlignment="Center"
-         KeyDown="MessageTextBox_KeyDown"/>
+            <TextBox x:Name="MessageTextBox"
+                     HorizontalAlignment="Left"
+                     Margin="150,446,0,0"
+                     Width="550"
+                     Height="40"
+                     Background="White"
+                     FontSize="14"
+                     Foreground="Black"
+                     BorderBrush="#4A6FA5"
+                     BorderThickness="2"
+                     VerticalAlignment="Top"
+                     VerticalContentAlignment="Center"
+                     KeyDown="MessageTextBox_KeyDown"/>
 
-        <!-- Send icon -->
-        <Label Content="CyberBot" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="Your Ai Assistant" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.944,1.788" FontWeight="Bold"/>
-        <Button Content="Enter Name"
-        HorizontalAlignment="Left"
-        Margin="575,446,0,0"
-        VerticalAlignment="Top"
-        Width="120"
-        Height="40"
-        Click="Button_Click"
-        Background="#1A2A3A"
-        Foreground="White"
-        FontWeight="Bold"/>
-        <Button Content="SEND"
-        HorizontalAlignment="Left"
-        Margin="705,446,0,0"
-        VerticalAlignment="Top"
-        Height="40"
-        Width="55"
-        FontWeight="Bold"
-        Background="#FF263FE5"
-        FontSize="14"
-        FontStyle="Italic"
-        Click="SendButton_Click"/>
-        <Image HorizontalAlignment="Left" Height="69" Margin="373,75,0,0" VerticalAlignment="Top" Width="51" RenderTransformOrigin="-1.482,0.398" Source="/robot-logo-icon-design_775854-1820.jpg"/>
+            <Button Content="Enter Name"
+                    HorizontalAlignment="Left"
+                    Margin="575,446,0,0"
+                    VerticalAlignment="Top"
+                    Width="120"
+                    Height="40"
+                    Click="Button_Click"
+                    Background="#1A2A3A"
+                    Foreground="White"
+                    FontWeight="Bold"/>
+
+            <Button Content="SEND"
+                    HorizontalAlignment="Left"
+                    Margin="705,446,0,0"
+                    VerticalAlignment="Top"
+                    Height="40"
+                    Width="55"
+                    FontWeight="Bold"
+                    Background="#FF263FE5"
+                    FontSize="14"
+                    FontStyle="Italic"
+                    Click="SendButton_Click"/>
+        </Grid>
+
+        <!-- ========== TAB 2: TASKS ========== -->
+        <Grid x:Name="TasksPanel" Visibility="Collapsed" Margin="135,190,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="📋 Task Assistant" FontSize="18" FontWeight="Bold" Foreground="#1A2A3A" Margin="0,0,0,10"/>
+
+            <TextBox x:Name="TaskTitleBox" Grid.Row="1" Margin="0,0,0,5" Height="30" 
+                     Text="Enter task title..." VerticalContentAlignment="Center" Background="White" BorderBrush="#4A6FA5" BorderThickness="2"/>
+
+            <TextBox x:Name="TaskDescriptionBox" Grid.Row="2" Margin="0,0,0,5" Height="30" 
+                     Text="Enter task description..." VerticalContentAlignment="Center" Background="White" BorderBrush="#4A6FA5" BorderThickness="2"/>
+
+            <TextBox x:Name="TaskReminderBox" Grid.Row="3" Margin="0,0,0,5" Height="30" 
+                     Text="Enter reminder (e.g., in 3 days)..." VerticalContentAlignment="Center" Background="White" BorderBrush="#4A6FA5" BorderThickness="2"/>
+
+            <Button x:Name="AddTaskButton" Grid.Row="4" Content="➕ Add Task" Click="AddTaskButton_Click" 
+                    Margin="0,0,0,10" Height="35" Background="#28A745" Foreground="White" FontWeight="Bold"/>
+
+            <ListBox x:Name="TaskListBox" Grid.Row="5" Margin="0,0,0,10" Height="180" Background="White" BorderBrush="#4A6FA5" BorderThickness="2"/>
+
+            <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Button x:Name="CompleteTaskButton" Content="✅ Complete" Click="CompleteTaskButton_Click" 
+                        Margin="5" Height="30" Width="100" Background="#17A2B8" Foreground="White" FontWeight="Bold"/>
+                <Button x:Name="DeleteTaskButton" Content="🗑️ Delete" Click="DeleteTaskButton_Click" 
+                        Margin="5" Height="30" Width="100" Background="#DC3545" Foreground="White" FontWeight="Bold"/>
+                <Button x:Name="RefreshTasksButton" Content="🔄 Refresh" Click="RefreshTasksButton_Click" 
+                        Margin="5" Height="30" Width="100" Background="#6C757D" Foreground="White" FontWeight="Bold"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ========== TAB 3: QUIZ (FIXED) ========== -->
+        <Grid x:Name="QuizPanel" Visibility="Collapsed" Margin="135,190,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="🎯 Cybersecurity Quiz" FontSize="18" FontWeight="Bold" Foreground="#1A2A3A" Margin="0,0,0,10"/>
+
+            <Button x:Name="QuizStartButton" Grid.Row="1" Content="🚀 Start New Quiz" Click="QuizStartButton_Click" 
+                    Height="35" Background="#28A745" Foreground="White" FontWeight="Bold"/>
+
+            <TextBlock x:Name="QuizProgressText" Grid.Row="2" Text="Question 0 of 0" FontSize="14" FontWeight="Bold" Margin="0,10,0,5" Foreground="#1A2A3A"/>
+
+            <TextBlock x:Name="QuizQuestionText" Grid.Row="3" FontSize="16" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#1A2A3A"/>
+
+            <StackPanel x:Name="QuizOptionsPanel" Grid.Row="4" Margin="0,0,0,10"/>
+
+            <TextBlock x:Name="QuizFeedbackText" Grid.Row="5" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#1A2A3A"/>
+
+            <TextBlock x:Name="QuizScoreText" Grid.Row="6" FontSize="14" FontWeight="Bold" Margin="0,0,0,10" Foreground="#1A2A3A"/>
+
+            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                <Button x:Name="QuizSubmitButton" Content="Submit Answer" Click="QuizSubmitButton_Click" 
+                        Height="35" Width="120" Background="#4A6FA5" Foreground="White" FontWeight="Bold" Margin="5,0"/>
+                <Button x:Name="QuizNextButton" Content="Next Question" Click="QuizNextButton_Click" 
+                        Height="35" Width="120" Background="#17A2B8" Foreground="White" FontWeight="Bold" Visibility="Collapsed" Margin="5,0"/>
+            </StackPanel>
+
+            <Button x:Name="QuizResetButton" Grid.Row="8" Content="🔄 Reset Quiz" Click="QuizResetButton_Click" 
+                    Height="35" Background="#FFC107" Foreground="Black" FontWeight="Bold" Visibility="Collapsed"/>
+        </Grid>
+
+        <!-- ========== TAB 4: ACTIVITY LOG ========== -->
+        <Grid x:Name="LogPanel" Visibility="Collapsed" Margin="135,190,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="📊 Activity Log" FontSize="18" FontWeight="Bold" Foreground="#1A2A3A" Margin="0,0,0,10"/>
+
+            <Button x:Name="RefreshLogButton" Grid.Row="1" Content="🔄 Refresh Log" Click="RefreshLogButton_Click" 
+                    Height="35" Background="#4A6FA5" Foreground="White" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <ListBox x:Name="LogListBox" Grid.Row="2" Background="White" BorderBrush="#4A6FA5" BorderThickness="2" 
+                     FontFamily="Consolas" FontSize="12" Margin="0,0,0,10"/>
+
+            <Button x:Name="ShowMoreLogButton" Grid.Row="3" Content="📖 Show More" Click="ShowMoreLogButton_Click" 
+                    Height="35" Background="#6C757D" Foreground="White" FontWeight="Bold" Visibility="Collapsed"/>
+        </Grid>
 
     </Grid>
 </Window>

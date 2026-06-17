@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POEPART2
 {
@@ -11,19 +8,29 @@ namespace POEPART2
         private User currentUser;
         private string lastTopic = "";
         private int followUpCount = 0;
-         
+
         private Dictionary<string, string> primaryResponses;
         private Dictionary<string, List<string>> randomResponses;
         private Dictionary<string, string> sentimentResponses;
+        private ActivityLogger _logger;
+        private TaskManager _taskManager;
 
+        // ===== CONSTRUCTORS =====
         public ChatbotEngine(User user)
         {
             currentUser = user;
-            LoadPrimaryResponses(); 
+            LoadPrimaryResponses();
             LoadRandomResponses();
-            LoadSentimentResponses(); 
+            LoadSentimentResponses();
         }
 
+        public ChatbotEngine(User user, ActivityLogger logger, TaskManager taskManager) : this(user)
+        {
+            _logger = logger;
+            _taskManager = taskManager;
+        }
+
+        // ===== LOAD RESPONSES =====
         private void LoadPrimaryResponses()
         {
             primaryResponses = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -73,6 +80,7 @@ namespace POEPART2
             };
         }
 
+        // ===== SENTIMENT DETECTION =====
         public string DetectSentiment(string userInput)
         {
             string lower = userInput.ToLower();
@@ -87,6 +95,173 @@ namespace POEPART2
             return null;
         }
 
+        // ===== PART 3: NLP PROCESS INPUT =====
+        public string ProcessInput(string userInput)
+        {
+            if (string.IsNullOrWhiteSpace(userInput))
+                return "Please type a message. I'm here to help!";
+
+            string lower = userInput.ToLower();
+
+            // Step 1: Check for Activity Log intent
+            if (IsLogRequest(lower))
+            {
+                _logger?.Log("NLP recognised log request");
+                return GetActivityLog();
+            }
+
+            // Step 2: Check for Task intent
+            if (IsTaskRequest(lower))
+            {
+                string taskName = ExtractTaskName(userInput);
+                _logger?.Log($"NLP recognised task intent: '{taskName}'");
+                return AddTaskFromNLP(taskName);
+            }
+
+            // Step 3: Check for Reminder intent
+            if (IsReminderRequest(lower))
+            {
+                string reminderText = ExtractReminderText(userInput);
+                _logger?.Log($"NLP recognised reminder: '{reminderText}'");
+                return SetReminderFromNLP(reminderText);
+            }
+
+            // Step 4: Check for Quiz intent
+            if (IsQuizRequest(lower))
+            {
+                _logger?.Log("NLP recognised quiz request");
+                return "🎯 Great! Let's start the cybersecurity quiz. Click the 'Quiz' tab in the menu or type 'start quiz' again!";
+            }
+
+            // Step 5: Fall through to existing Part 2 logic
+            return GetResponse(userInput);
+        }
+
+        // ===== PART 3: INTENT DETECTION =====
+        private bool IsLogRequest(string input)
+        {
+            return input.Contains("show activity log") ||
+                   input.Contains("what have you done") ||
+                   input.Contains("what did you do") ||
+                   input.Contains("show log") ||
+                   input.Contains("recent actions") ||
+                   input.Contains("activity log") ||
+                   input.Contains("log");
+        }
+
+        private bool IsTaskRequest(string input)
+        {
+            return input.Contains("add task") ||
+                   input.Contains("add a task") ||
+                   input.Contains("create task") ||
+                   input.Contains("new task") ||
+                   input.Contains("enable") ||
+                   input.Contains("set up") ||
+                   input.Contains("need to") ||
+                   input.Contains("i should");
+        }
+
+        private bool IsReminderRequest(string input)
+        {
+            return input.Contains("remind me") ||
+                   input.Contains("set a reminder") ||
+                   input.Contains("reminder") ||
+                   input.Contains("don't forget") ||
+                   input.Contains("remember to");
+        }
+
+        private bool IsQuizRequest(string input)
+        {
+            return input.Contains("start quiz") ||
+                   input.Contains("take quiz") ||
+                   input.Contains("test my knowledge") ||
+                   input.Contains("quiz me") ||
+                   input.Contains("play the game") ||
+                   input.Contains("let's quiz") ||
+                   input.Contains("do the quiz");
+        }
+
+        // ===== PART 3: EXTRACTION METHODS =====
+        private string ExtractTaskName(string input)
+        {
+            string task = input;
+            string[] removePhrases = {
+                "add task", "add a task", "create task", "new task",
+                "enable", "set up", "i need to", "i should", "please"
+            };
+            foreach (var phrase in removePhrases)
+            {
+                if (task.ToLower().Contains(phrase.ToLower()))
+                    task = task.Replace(phrase, "", StringComparison.OrdinalIgnoreCase);
+            }
+            return task.Trim();
+        }
+
+        private string ExtractReminderText(string input)
+        {
+            string reminder = input;
+            string[] removePhrases = {
+                "remind me", "set a reminder", "reminder", "don't forget",
+                "remember to", "please remind me", "remind me to"
+            };
+            foreach (var phrase in removePhrases)
+            {
+                if (reminder.ToLower().Contains(phrase.ToLower()))
+                    reminder = reminder.Replace(phrase, "", StringComparison.OrdinalIgnoreCase);
+            }
+            return reminder.Trim();
+        }
+
+        // ===== PART 3: ACTION METHODS =====
+        private string AddTaskFromNLP(string taskName)
+        {
+            if (string.IsNullOrEmpty(taskName))
+                return "I couldn't understand what task you want to add. Please be more specific.";
+
+            if (_taskManager != null)
+            {
+                string result = _taskManager.AddTask(taskName, $"Added via NLP: {taskName}", "No reminder set");
+                _logger?.Log($"NLP added task: '{taskName}'");
+                return $"{result}\n\nWould you like to set a reminder for this task? (Type 'Yes, remind me in X days' or 'No')";
+            }
+            else
+            {
+                return $"✅ Task added: '{taskName}'. (TaskManager not available)";
+            }
+        }
+
+        private string SetReminderFromNLP(string reminderText)
+        {
+            if (string.IsNullOrEmpty(reminderText))
+                return "What would you like to be reminded about?";
+
+            string timePhrase = "soon";
+            if (reminderText.ToLower().Contains("tomorrow"))
+                timePhrase = "tomorrow";
+            else if (reminderText.ToLower().Contains("day") && reminderText.ToLower().Contains("in"))
+                timePhrase = "in the coming days";
+
+            _logger?.Log($"NLP set reminder: '{reminderText}'");
+            return $"⏰ Reminder set for '{reminderText}' ({timePhrase}). I'll remind you as requested.";
+        }
+
+        private string GetActivityLog()
+        {
+            if (_logger == null)
+                return "📋 Activity log is not available.";
+
+            var logs = _logger.GetRecentLogs(10);
+            if (logs.Count == 0)
+                return "📋 No recent activity to show.";
+
+            string logMessage = "📋 Here's a summary of recent actions:\n";
+            foreach (var log in logs)
+                logMessage += log + "\n";
+
+            return logMessage;
+        }
+
+        // ===== PART 2: MAIN RESPONSE METHOD (ONLY ONE) =====
         public string GetResponse(string userInput)
         {
             if (string.IsNullOrWhiteSpace(userInput))
@@ -94,6 +269,7 @@ namespace POEPART2
 
             currentUser.IncrementQuestions();
 
+            // Sentiment detection
             string sentiment = DetectSentiment(userInput);
             if (sentiment != null && sentimentResponses.ContainsKey(sentiment))
             {
@@ -102,16 +278,20 @@ namespace POEPART2
                 return empathy + "\n\n" + answer;
             }
 
+            // Follow-up requests
             if (IsFollowUpRequest(userInput))
                 return GetFollowUpResponse();
 
+            // Store favourite topic (memory)
             StoreFavoriteTopic(userInput);
 
+            // Get cybersecurity answer
             string response = GetCybersecurityAnswer(userInput);
             UpdateContext(userInput, response);
             return response;
         }
 
+        // ===== PART 2: HELPER METHODS =====
         private bool IsFollowUpRequest(string input)
         {
             string lower = input.ToLower();
@@ -145,6 +325,7 @@ namespace POEPART2
         {
             string lower = input.ToLower();
 
+            // Check random responses first
             foreach (var kvp in randomResponses)
             {
                 if (lower.Contains(kvp.Key.ToLower()))
@@ -154,12 +335,14 @@ namespace POEPART2
                 }
             }
 
+            // Check primary responses
             foreach (var kvp in primaryResponses)
             {
                 if (lower.Contains(kvp.Key.ToLower()))
                     return kvp.Value;
             }
 
+            // Default error handling
             return "I'm not sure I understand. Can you try rephrasing? You can ask about passwords, phishing, privacy, scams, or 2FA.";
         }
 
