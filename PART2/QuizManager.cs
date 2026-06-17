@@ -75,7 +75,7 @@ namespace POEPART2
                     IsTrueFalse = false
                 },
                 // Topic: Social Engineering (True/False)
-                new QuizQuestion
+                new QuizQuestion 
                 {
                     Question = "Scammers often create a sense of urgency to trick you.",
                     Options = new List<string> { "True", "False" },
