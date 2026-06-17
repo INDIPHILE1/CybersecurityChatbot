@@ -9,7 +9,7 @@ namespace POEPART2
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         public void Log(string action)
-        {
+        { 
             try
             {
                 var log = new Log
